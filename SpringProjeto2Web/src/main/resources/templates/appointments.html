@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <div class="brand-logo">
+        <span>Aqui fica o logo</span>
+    </div>
+
+    <input type="checkbox" id="toggle-btn">
+    <label for="toggle-btn" class="show-menu-btn"><i class="fas fa-bars"></i></label>
+
+    <nav>
+        <ul class="navigation">
+            <li><a href="#"><i class="fas fa-phone-alt"></i>Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="corpo">
+
+    <div class="table">
+        <table>
+            <thead>
+
+            <tr>
+                <th>Doctor</th>
+                <th>Observations</th>
+                <th>Date</th>
+                <th>Situation</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="consulta : ${consultas}">
+                <td th:text="${consulta.getIdMedico()}">MEDICO</td>
+                <td th:text="${consulta.getRelatorio()}">RELATORIO</td>
+                <td th:text="${consulta.getDataRealizada()}">Data</td>
+                <td th:text="${consulta.getEstado()}">Situação</td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <button class="button" >Make new appointment request</button>
+
+
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: arial;
+    }
+    header {
+        height: 100%;
+        width: 100%;
+        float: left;
+        background: linear-gradient(rgba(109, 109, 109, 0.6), rgba(173, 173, 173, 0.80));
+        padding: 0 20px;
+        color: #fff;
+    }
+    body{
+
+        background: rgba(192, 190, 190, 0.87);
+    }
+    .brand-logo {
+        max-width: 75px;
+        float: left;
+        padding: 15px 0px;
+        margin-left: 2%;
+    }
+    .brand-logo img {
+        max-width: 100%;
+
+    }
+    .navigation {
+        float: right;
+    }
+    .navigation li {
+        list-style: none;
+        float: left;
+    }
+    .navigation li a {
+        color: #ffffff;
+        padding: 20px 15px;
+        text-transform: uppercase;
+        text-align: center;
+        display: block;
+        text-decoration: none;
+    }
+    .navigation li a i {
+        width: 100%;
+        font-size: 20px;
+        margin-bottom: 7px;
+    }
+    .show-menu-btn,
+    .hide-menu-btn {
+        transition: 0.4s;
+        font-size: 30px;
+        cursor: pointer;
+        display: none;
+    }
+    .show-menu-btn {
+        margin: 0px;
+        float: right;
+    }
+    .show-menu-btn i {
+        line-height: 100px;
+    }
+    .navigation a:hover,
+    .show-menu-btn:hover,
+    .hide-menu-btn:hover {
+        color: #00ffd2;
+    }
+    #toggle-btn {
+        position: absolute;
+        visibility: hidden;
+        z-index: -1111;
+    }
+    table{
+        border-spacing: 0;
+        margin: 10% auto;
+    }
+    td,th{
+        border: 1px solid #000000;
+        padding: 8px;
+    }
+
+    .button{
+        display: flex;
+        margin: auto;
+    }
+    .table{
+        padding-top: 1%;
+    }
+
+</style>
+</html>

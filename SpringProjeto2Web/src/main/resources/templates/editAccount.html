@@ -1,0 +1,175 @@
+<!DOCTYPE HTML SYSTEM "http://www.thymeleaf.oorg/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<header>
+    <div class="brand-logo">
+        <span>Aqui fica o logo</span>
+    </div>
+
+    <input type="checkbox" id="toggle-btn">
+    <label for="toggle-btn" class="show-menu-btn"><i class="fas fa-bars"></i></label>
+
+    <nav>
+        <ul class="navigation">
+            <li><a href="#"><i class="fas fa-phone-alt"></i>Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="corpo">
+
+    <div class="corpoInfo">
+
+        <h1> Edit Account </h1>
+
+    </div>
+
+    <form action="/account" method="post">
+
+
+        <div class="infoEdit">
+            <div class="inputs">
+                <label for="fname">First name:</label>
+                <input type="text" id="fname" name="primeiroNome" th:value="${Utente.getPrimeiroNome()}">
+            </div>
+            <br>
+            <div class="inputs">
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="apelido" th:value="${Utente.getApelido()}">
+            </div>
+            <br>
+            <div class="inputs">
+                <label for="email">Password:</label>
+                <input type="password" id="email" name="password" value="">
+            </div>
+            <br>
+            <div class="inputs">
+                <label for="phone number">Phone Number:</label>
+                <input type="text" id="phone number" name="nrTelemovel" th:value="${Utente.getNrTelemovel()}">
+
+            </div>
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+
+
+        </div>
+
+
+    </form>
+
+
+
+
+</div>
+
+</body>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: arial;
+    }
+    header {
+        height: 100%;
+        width: 100%;
+        float: left;
+        background: linear-gradient(rgba(109, 109, 109, 0.6), rgba(173, 173, 173, 0.80));
+        padding: 0 20px;
+        color: #fff;
+    }
+    body{
+
+        background: rgba(192, 190, 190, 0.87);
+    }
+    .brand-logo {
+        max-width: 75px;
+        float: left;
+        padding: 15px 0px;
+        margin-left: 2%;
+    }
+    .brand-logo img {
+        max-width: 100%;
+
+    }
+    .navigation {
+        float: right;
+    }
+    .navigation li {
+        list-style: none;
+        float: left;
+    }
+    .navigation li a {
+        color: #ffffff;
+        padding: 20px 15px;
+        text-transform: uppercase;
+        text-align: center;
+        display: block;
+        text-decoration: none;
+    }
+    .navigation li a i {
+        width: 100%;
+        font-size: 20px;
+        margin-bottom: 7px;
+    }
+    .show-menu-btn,
+    .hide-menu-btn {
+        transition: 0.4s;
+        font-size: 30px;
+        cursor: pointer;
+        display: none;
+    }
+    .show-menu-btn {
+        margin: 0px;
+        float: right;
+    }
+    .show-menu-btn i {
+        line-height: 100px;
+    }
+    .navigation a:hover,
+    .show-menu-btn:hover,
+    .hide-menu-btn:hover {
+        color: #00ffd2;
+    }
+    #toggle-btn {
+        position: absolute;
+        visibility: hidden;
+        z-index: -1111;
+    }
+    .corpo{
+
+        width: 100%;
+        height: 100%;
+        padding-top: 5%;
+
+    }
+
+    .corpoInfo{
+        margin: 5% 10%;
+    }
+    .infoEdit{
+        font-size: 18px;
+        width: 30%;
+        margin: 10% auto;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .inputs{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .inputs input{
+        width: 60%;
+    }
+</style>
+</html>
