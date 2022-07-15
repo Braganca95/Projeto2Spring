@@ -2,6 +2,8 @@ package com.example.SpringProjeto2Web.controllers;
 
 import com.example.SpringProjeto2Web.DAL.Account;
 import com.example.SpringProjeto2Web.DAL.Utente;
+import com.example.SpringProjeto2Web.Repository.Repository;
+import com.example.SpringProjeto2Web.Repository.Session;
 import com.example.SpringProjeto2Web.Repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,51 +16,43 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="/account")
 public class AccountController {
 
+    Session session = Session.getInstance();
+    @Autowired
+   private Repository repositorio;
     @Autowired
     private UtenteRepository repository;
 
     @GetMapping()
     public ModelAndView account(){
-        ModelAndView mv = new ModelAndView("editAccount");
+        ModelAndView mv = new ModelAndView();
 
-        if( repository.getUtenteById(1).isPresent()) {
-            Utente ut = repository.getUtenteById(1).get();
-            System.out.println("***********");
-            System.out.println(ut.getPrimeiroNome());
-            System.out.println("***********");
-            mv.addObject("Utente",ut);
+
+        if(session.getUtenteLogado().equals(new Utente())){
+            System.out.println("*****");
+            System.out.println("nulo");
+            System.out.println("*******");
+            mv.setViewName("index");
+            return mv;
         }
 
+        mv.setViewName("editAccount");
 
+        mv.addObject("Utente",session.getUtenteLogado());
         return mv;
 
     }
 
     @PostMapping()
-    public String update(Account ac){
-        ModelAndView mv = new ModelAndView("editAccount");
+    public String update(Utente u) throws Exception {
 
 
-        System.out.println();
-        System.out.println(ac.getPassword());
-        System.out.println();
-
-/*
-        if( repository.getUtenteById(1).isPresent()) {
-            Utente ut = repository.getUtenteById(1).get();
-
-            ut.setApelido(ac.getApelido());
-            ut.setPassword(ac.getPassword());
-            ut.setPrimeiroNome(ac.getPrimeiroNome());
-            ut.se
-            System.out.println("***********");
-            System.out.println(ut.getPrimeiroNome());
-            System.out.println("***********");
+        System.out.println("#########");
+        System.out.println(u.getUserid() + u.getPrimeiroNome() + u.getApelido() + u.getCodigopostal()  + u.getNrTelemovel());
+        System.out.println("#########");
 
 
 
-            this.repository.updateUtenteById(ut.getUserid(),ac.getPassword(),ac.getPrimeiroNome(),ac.getApelido(),ac.getNrTelemovel(),ut.getNif(),ut.getCodigopostal(),ut.getId());
-        }*/
+        repositorio.update(2, u.getUserid(), u.getPrimeiroNome(), u.getApelido(), u.getCodigopostal(), u.getNrTelemovel());
 
 
 

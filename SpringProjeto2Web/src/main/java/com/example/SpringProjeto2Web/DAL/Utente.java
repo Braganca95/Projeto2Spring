@@ -10,9 +10,10 @@ import javax.persistence.*;
 @NamedQuery(name = "getUtenteNomeByID", query = "SELECT p.primeiroNome FROM Utente p WHERE p.id = :id")
 @NamedQuery(name="getUtentes", query="SELECT e FROM Utente e")
 @NamedQuery(name="getUtenteById", query="SELECT e FROM Utente e WHERE e.id=:id")
-@NamedQuery(name="Utente.updateUtenteById", query="UPDATE Utente u SET u.userid=:userid, u.primeiroNome=:primeiroNome, u.apelido=:apelido, u.password=function('crypt',:password,u.password), u.codigopostal=:codigoPostal, u.nrTelemovel=:nrTelemovel, u.nif=:nif WHERE u.id=:id")
+//@NamedQuery(name="Utente.updateUtenteById", query="UPDATE Utente u SET u.userid=:userid, u.primeiroNome=:primeiroNome, u.apelido=:apelido, u.password=function('crypt',:password,u.password), u.codigopostal=:codigoPostal, u.nrTelemovel=:nrTelemovel, u.nif=:nif WHERE u.id=:id")
 @NamedQuery(name="Utente.getUtentes", query="SELECT e FROM Utente e")
 @NamedQuery(name="Utente.getUtenteById", query="SELECT e FROM Utente e WHERE e.id=:id")
+@NamedQuery(name="updateUtenteById", query="UPDATE Utente u SET u.userid=:userid, u.primeiroNome=:primeiroNome, u.apelido=:apelido, u.codigopostal=:codigoPostal, u.nrTelemovel=:nrTelemovel WHERE u.id=:id")
 public class Utente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -40,7 +41,7 @@ public class Utente {
     @Column(name = "nif")
     private String nif;
 
-    public Utente(String primeiroNome, String apelido, String nrTelemovel, String codigopostal, String userid, String password, String nif) {
+    public Utente(int id, String primeiroNome, String apelido, String nrTelemovel, String codigopostal, String userid, String password, String nif) {
         this.primeiroNome = primeiroNome;
         this.apelido = apelido;
         this.nrTelemovel = nrTelemovel;
@@ -48,15 +49,25 @@ public class Utente {
         this.userid = userid;
         this.password = password;
         this.nif = nif;
+        this.id = id;
     }
 
     public Utente() {
+
+        this.id = 0;
+        this.apelido = "";
+        this.primeiroNome = "";
+        this.nrTelemovel = "";
+        this.userid = "";
+        this.password = "";
+        this.nif = "";
+        this.codigopostal = "";
 
     }
 
     public Utente clone(){
 
-        return new Utente(this.getPrimeiroNome(), this.getApelido(), this.getNrTelemovel(), this.getCodigopostal(), this.getUserid(), this.getPassword(), this.getNif());
+        return new Utente(this.getId(), this.getPrimeiroNome(), this.getApelido(), this.getNrTelemovel(), this.getCodigopostal(), this.getUserid(), this.getPassword(), this.getNif());
 
     }
 

@@ -44,13 +44,19 @@
             </div>
             <br>
             <div class="inputs">
-                <label for="email">Password:</label>
-                <input type="password" id="email" name="password" value="">
+                <label for="email">Código Postal:</label>
+                <input type="text" id="email" name="codigopostal" th:value="${Utente.getCodigopostal()}">
             </div>
             <br>
             <div class="inputs">
                 <label for="phone number">Phone Number:</label>
                 <input type="text" id="phone number" name="nrTelemovel" th:value="${Utente.getNrTelemovel()}">
+
+            </div>
+            <br>
+            <div class="inputs">
+                <label for="userid">UserID:</label>
+                <input type="text" id="userid" name="userid" th:value="${Utente.getUserid()}">
 
             </div>
             <br>

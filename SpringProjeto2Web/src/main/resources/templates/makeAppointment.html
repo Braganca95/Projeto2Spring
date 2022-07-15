@@ -1,0 +1,49 @@
+<!DOCTYPE HTML SYSTEM "http://www.thymeleaf.oorg/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<header>
+    <div class="brand-logo">
+        <span>Aqui fica o logo</span>
+    </div>
+
+    <input type="checkbox" id="toggle-btn">
+    <label for="toggle-btn" class="show-menu-btn"><i class="fas fa-bars"></i></label>
+
+    <nav>
+        <ul class="navigation">
+            <li><a href="#"><i class="fas fa-phone-alt"></i>Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class='container'>
+    <form action="/api/utente" method="post">
+        <div class='window'>
+            <div class='overlay'></div>
+            <div class='content'>
+                <div class='welcome'>Welcome!</div>
+                <div class='input-fields'>
+                    <label for="userid"> username </label>
+                    <input id="userid" type='text' name="userid" placeholder='Username' class='input-line full-width'></input>
+                    <label for="password"> password </label>
+                    <input id="password" type='password' name="password" placeholder='Password' class='input-line full-width'></input>
+
+                </div>
+                <div>
+                    <button class='ghost-round full-width'>Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+</body>
+</html>

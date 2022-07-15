@@ -1,18 +1,26 @@
 package com.example.SpringProjeto2Web.controllers;
 
 import com.example.SpringProjeto2Web.DAL.Utente;
+import com.example.SpringProjeto2Web.Repository.Repository;
+import com.example.SpringProjeto2Web.Repository.Session;
 import com.example.SpringProjeto2Web.Repository.UtenteRepository;
 import com.example.SpringProjeto2Web.DAL.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/api/utente")
 public class UtenteController {
+
+    Session session = Session.getInstance();
+
+    @Autowired
+    private Repository repositorio;
     @Autowired
     private UtenteRepository repository;
 
@@ -32,47 +40,35 @@ public class UtenteController {
         repository.save(utente);
     }
 
-  /*  public Utente getUtente(){
+    @PostMapping()
+    public String login(Login login, Model model){
 
-        Utente ut = new Utente();
+        Utente ut = repository.doLogin(login.getUserid(), login.getPassword());
 
-        System.out.println(repository.getUtentes());
-        ut = repository.getUtenteByUseridAndPassword(this.userid,this.password).orElse(null);
+        if(ut != null) {
 
-        if(ut == null) {
-            System.out.println();
-            System.out.println("Nulo");
-            System.out.println();
-            return null;
-        }
+            session.setUtenteLogado(ut.clone());
 
-        return ut.clone();
+            return "redirect:/menu";
 
-
-    }*/
-
-    @PostMapping("/")
-    public String doLogin(Login login){
-
-        System.out.println();
-        System.out.println(login.getUserid());
-        System.out.println();
-        System.out.println(repository.findAll());
-        System.out.println();
-
-        Optional<Utente> ut = repository.getUtenteByUseridAndPassword(login.getUserid(),login.getPassword());
-
-
-        System.out.println();
-        if(ut.isPresent()) {
-            System.out.println(ut.get().getPrimeiroNome() + ut.get().getPassword());
         }
         else{
             System.out.println("vazio");
         }
-        System.out.println();
 
-        return "redirect:/menu";
+        return "redirect:/";
+    }
+
+    @PostMapping(value = "/update/{id}")
+
+    public void update(@PathVariable("id") int id, @RequestBody Utente utente) throws Exception {
+
+        Utente u = utente;
+
+        System.out.println(u.getPrimeiroNome() + " " + id);
+
+        repositorio.update(id, u.getUserid(), u.getPrimeiroNome(), u.getApelido(), u.getCodigopostal(), u.getNrTelemovel());
 
     }
+
 }
